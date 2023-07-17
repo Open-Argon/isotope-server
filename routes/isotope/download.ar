@@ -1,0 +1,23 @@
+import "../server" as *
+import "../config" as *
+import "../save" as *
+
+let search(req, res) = do
+    let name = req.query.name
+    let version = req.query.version
+    let package = packages.get(name)
+    if (package == null) do
+        res.code = 404
+        res.send("Package not found")
+        return
+    let currentVersion = package.versions.get(version)
+    forever do
+        let redirect = currentVersion.get("redirect")
+        if (redirect) do
+            currentVersion = package.versions.get(redirect)
+            continue
+        break
+    let filename = currentVersion.get("filename")
+    let p = path.join([program.cwd,"packages", name, filename])
+    res.sendFile(p)
+app.route("/isotope-download", null, search)

@@ -1,0 +1,27 @@
+import "../server" as *
+import "../randstr" as *
+import "../save" as *
+
+let push(req, res) = do
+    let name = req.formdata.name
+    let version = req.formdata.version
+    let file = req.files.file
+    let package = packages.get(name)
+    if (package == null) do
+        package = {versions:{}}
+        packages[name] = package
+    let currentVersion = package.versions.get(version)
+    let directory = path.join([program.cwd, "packages", name])
+    if (currentVersion == null) do
+        currentVersion = {name:name, version:version}
+        package.versions[version] = currentVersion
+    let filename = version+".tar.gz"
+    let p = path.join([directory, filename])
+    term.log(directory)
+    path.mkAllDir(directory)
+    file.save(p)
+    currentVersion.filename = filename
+    package.versions['latest'] = {redirect: version}
+    changes.n = changes.n + 1
+    res.send("OK")
+app.route("/isotope-push", ['POST'], push)

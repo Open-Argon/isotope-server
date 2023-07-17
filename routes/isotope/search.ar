@@ -1,0 +1,24 @@
+import "../server" as *
+import "../config" as config
+import "../save" as *
+import "http.ar/url" as urllib
+
+let search(req, res) = do
+    let name = req.query.name
+    let version = req.query.version
+    let package = packages.get(name)
+    if (package == null) do
+        res.code = 404
+        res.send("Package not found")
+        return
+    let currentVersion = package.versions.get(version)
+    forever do
+        let redirect = currentVersion.get("redirect")
+        if (redirect) do
+            currentVersion = package.versions.get(redirect)
+            continue
+        break
+    let filename = currentVersion.get("filename")
+    let URL = config.url+"/isotope-download?"+urllib.queryStr({name:currentVersion.name, version:currentVersion.version})
+    res.json({Name: currentVersion.name, Version: currentVersion.version, URL:URL })
+app.route("/isotope-search", null, search)

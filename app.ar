@@ -1,0 +1,13 @@
+import "server" as *
+import "config" as *
+import "save"
+
+# routes
+
+
+# isotope
+import "routes/isotope/push" as *
+import "routes/isotope/search" as *
+import "routes/isotope/download" as *
+
+app.run()

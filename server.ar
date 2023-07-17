@@ -1,0 +1,7 @@
+import "http.ar" as http
+
+let app = http.server()
+
+app.use(http.logger)
+app.use(http.formdata)
+app.port = 7030
