@@ -11,6 +11,7 @@ let load() = do
 
 let save() = do
     if (changes.n == changes.last) return
+    changes.last = changes.n
     let file = file.write(savePath)
     file.json(packages)
     file.close()
