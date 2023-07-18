@@ -6,6 +6,7 @@ let push(req, res) = do
     let name = req.formdata.name
     let version = req.formdata.version
     let file = req.files.file
+    let latest = req.formdata.latest
     let package = packages.get(name)
     if (package == null) do
         package = {versions:{}}
@@ -21,7 +22,8 @@ let push(req, res) = do
     path.mkAllDir(directory)
     file.save(p)
     currentVersion.filename = filename
-    package.versions['latest'] = {redirect: version}
+    if (latest == "true") do
+        package.versions['latest'] = {redirect: version}
     changes.n = changes.n + 1
     res.send("OK")
 app.route("/isotope-push", ['POST'], push)
