@@ -2,12 +2,12 @@ import "server" as *
 import "config" as *
 import "save"
 
-# routes
-
+# website
+import "routes/website/home"
 
 # isotope
-import "routes/isotope/push" as *
-import "routes/isotope/search" as *
-import "routes/isotope/download" as *
+import "routes/isotope/push"
+import "routes/isotope/search"
+import "routes/isotope/download"
 
 app.run()

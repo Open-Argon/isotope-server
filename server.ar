@@ -4,4 +4,5 @@ let app = http.server()
 
 app.use(http.logger)
 app.use(http.formdata)
+app.use(http.static("/","static"))
 app.port = 7030
