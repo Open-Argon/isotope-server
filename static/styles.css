@@ -74,6 +74,25 @@ h6 {
     text-decoration: none;
 }
 
+.logo::before {
+    content: "Isotope";
+}
+
 .welcome {
     display: flex;
+    min-height: 500px;
+    margin: 2.5rem 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.welcome h1 {
+    margin: 1rem;
+    text-align: center;
+}
+
+.welcome svg {
+    width: 500px;
 }
