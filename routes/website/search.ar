@@ -1,0 +1,12 @@
+import "../server" as *
+
+let search(req, res) = do
+    let results = []
+    if ("q" not in req.query) do
+        res.code = 400
+        res.send("Missing query")
+        return
+    let query = req.query.q
+
+    res.renderTemplate("search.html", {query:query, numOfResults:0})
+app.route("/search", null, search)

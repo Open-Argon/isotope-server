@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Search - Isotope</title>
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="194x194"
+            href="/favicon-194x194.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="192x192"
+            href="/android-chrome-192x192.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#0b1d28" />
+        <meta name="apple-mobile-web-app-title" content="Isotope" />
+        <meta name="application-name" content="Isotope" />
+        <meta name="msapplication-TileColor" content="#0b1d28" />
+        <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
+        <meta name="theme-color" content="#0b1d28" />
+    </head>
+    <body>
+        <div class="content">
+            <ul class="navbar">
+                <li>
+                    <a href="/"><div class="logo"></div></a>
+                </li>
+                <li>
+                    <a href="https://github.com/open-argon/Isotope">Github</a>
+                </li>
+            </ul>
+            <div>
+                <form action="/search" method="GET" class="search">
+                    <input
+                        type="text"
+                        name="q"
+                        placeholder="Search for a package"
+                        class="bar"
+                        value="{{query}}"
+                    />
+                    <input type="submit" value="Search" class="button" />
+                </form>
+                <h2>{{numOfResults}} result(s) for '{{query}}'</h2>
+                <div>{{%packages}}</div>
+            </div>
+        </div>
+    </body>
+</html>

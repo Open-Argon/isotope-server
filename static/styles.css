@@ -96,3 +96,40 @@ h6 {
 .welcome svg {
     width: 500px;
 }
+
+textarea:focus,
+input:focus {
+    outline: none;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    margin: 2.5rem 0;
+    justify-content: center;
+}
+
+.search .bar {
+    width: 500px;
+    height: 50px;
+    border-radius: 25px;
+    color: var(--text);
+    background-color: var(--secondary);border: 1px solid var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.search .button {
+    width: 100px;
+    border-radius: 25px;
+    margin-left: 1rem;
+    color: var(--text);
+    background-color: var(--primary);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
