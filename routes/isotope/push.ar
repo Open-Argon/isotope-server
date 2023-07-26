@@ -9,7 +9,7 @@ let push(req, res) = do
     let latest = req.formdata.latest
     let package = packages.get(name)
     if (package == null) do
-        package = {versions:{}}
+        package = {versions:{}, name:name}
         packages[name] = package
     let currentVersion = package.versions.get(version)
     let directory = path.join([program.cwd, "packages", name])

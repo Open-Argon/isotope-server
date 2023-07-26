@@ -1,4 +1,7 @@
 import "../server" as *
+import "../save" as *
+import "url.ar" as url
+import "bleach.ar" as bleach
 
 let search(req, res) = do
     let results = []
@@ -7,6 +10,18 @@ let search(req, res) = do
         res.send("Missing query")
         return
     let query = req.query.q
-
-    res.renderTemplate("search.html", {query:query, numOfResults:0})
+    let keys = packages.keys()
+    for (i from 0 to keys.length) do
+        let key = keys[i]
+        let package = packages[key]
+        if ("name" not in package) package.name = key
+        let name = package.name
+        if (query in name) results.append(package)
+    let render = [] # string[]
+    for (i from 0 to results.length) do
+        let package = results[i]
+        term.log(package)
+        let name = package.name
+        render.append("<a href='/package?"+url.queryStr({name:name})+"'>"+bleach.clean(name)+"</a>")
+    res.renderTemplate("search.html", {query:query, numOfResults:results.length, results:render.join("<br>")})
 app.route("/search", null, search)

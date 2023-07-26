@@ -17,7 +17,7 @@ let save() = do
     file.close()
 
 let saveThread() = do
-    while (true) do
+    forever do
         try do
             save()
         catch (e) do

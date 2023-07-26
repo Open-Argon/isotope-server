@@ -1,7 +1,7 @@
 import "../server" as *
 import "../config" as config
 import "../save" as *
-import "http.ar/url" as urllib
+import "url.ar" as urllib
 
 let search(req, res) = do
     let name = req.query.name
