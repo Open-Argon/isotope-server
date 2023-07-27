@@ -1,0 +1,26 @@
+import "../server" as *
+import "../save" as *
+import "url.ar" as url
+import "bleach.ar" as bleach
+import "shlex.ar" as shlex
+
+let package(req, res) = do
+    let name = req.query.name
+    let version = req.query.get("version", "latest")
+    let commandName = name
+    if (version != "latest") commandName = commandName + "@"+version
+    let command = shlex.join(["isotope", "install", commandName])
+    let package = packages.get(name)
+    if (package == null) do
+        res.code = 404
+        res.send("Package not found")
+        return
+    let versions = []
+    let keys = package.versions.keys()
+    for (i from 0 to keys.length) do
+        let versioni = keys[i]
+        if (version == versioni) continue
+        let URL = "/package?"+url.queryStr({name:name, version:versioni})
+        versions.append("<a href='"+URL+"'>"+bleach.clean(name+"@"+versioni)+"</a>")
+    res.renderTemplate("package.html", {name:name, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
+app.route("/package", null, package)

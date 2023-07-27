@@ -5,6 +5,7 @@ import "save"
 # website
 import "routes/website/home"
 import "routes/website/search"
+import "routes/website/package"
 
 # isotope
 import "routes/isotope/push"

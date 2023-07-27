@@ -10,6 +10,7 @@ let push(req, res) = do
     let package = packages.get(name)
     if (package == null) do
         package = {versions:{}, name:name}
+        latest = "true"
         packages[name] = package
     let currentVersion = package.versions.get(version)
     let directory = path.join([program.cwd, "packages", name])

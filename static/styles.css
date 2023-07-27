@@ -114,7 +114,8 @@ input:focus {
     height: 50px;
     border-radius: 25px;
     color: var(--text);
-    background-color: var(--secondary);border: 1px solid var(--primary);
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -131,5 +132,31 @@ input:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    align-items: stretch;
+}
+
+.results a {
+    text-decoration: none;
+    color: var(--text);
+    margin: 0.5rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: var(--secondary);
+    border: 1px solid var(--primary);
+}
+
+pre {
+    background-color: var(--secondary);
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid var(--primary);
+    overflow-x: auto;
     cursor: pointer;
 }

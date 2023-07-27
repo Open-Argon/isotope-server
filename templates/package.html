@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Search - Isotope</title>
+        <title>Isotope</title>
         <link rel="stylesheet" type="text/css" href="/styles.css" />
         <meta
             name="viewport"
@@ -45,6 +45,18 @@
         <meta name="msapplication-TileColor" content="#0b1d28" />
         <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
         <meta name="theme-color" content="#0b1d28" />
+        <script>
+            function copyToClipboard(text) {
+                navigator.clipboard
+                    .writeText(text)
+                    .then(() => {
+                        console.log(`Copied text to clipboard: ${text}`);
+                    })
+                    .catch((error) => {
+                        console.error(`Could not copy text: ${error}`);
+                    });
+            }
+        </script>
     </head>
     <body>
         <div class="content">
@@ -57,18 +69,10 @@
                 </li>
             </ul>
             <div>
-                <form action="/search" method="GET" class="search">
-                    <input
-                        type="text"
-                        name="q"
-                        placeholder="Search for a package"
-                        class="bar"
-                        value="{{query}}"
-                    />
-                    <input type="submit" value="Search" class="button" />
-                </form>
-                <h2>{{numOfResults}} result(s) for '{{query}}'</h2>
-                <div class="results">{{%results}}</div>
+                <h1>{{name}}</h1>
+                <pre onclick="copyToClipboard(event.target.dataset.command)" data-command="{{command}}">{{command}}<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
+                <h2>Versions</h2>
+                <div class="results">{{%versions}}</div>
             </div>
         </div>
     </body>
