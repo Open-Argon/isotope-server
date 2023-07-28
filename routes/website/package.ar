@@ -15,8 +15,13 @@ let package(req, res) = do
         res.code = 404
         res.send("Package not found")
         return
+    if (version not in package.versions) do
+        res.code = 404
+        res.send("Version not found")
+        return
     let versions = []
     let keys = package.versions.keys()
+    keys.sort()
     for (i from 0 to keys.length) do
         let versioni = keys[i]
         if (version == versioni) continue

@@ -10,6 +10,7 @@ let search(req, res) = do
         return
     let query = req.query.q
     let keys = packages.keys()
+    keys.sort()
     let render = []
     let results = 0
     for (i from 0 to keys.length) do
