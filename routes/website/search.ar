@@ -16,7 +16,7 @@ let search(req, res) = do
     for (i from 0 to keys.length) do
         let name = keys[i]
         let package = packages[name]
-        if (query in name) do
+        if (query.lower() in name.lower()) do
             render.append("<a href='/package?"+url.queryStr({name:name})+"'>"+bleach.clean(name)+"</a>")
             results = results + 1
     res.renderTemplate("search.html", {query:query, numOfResults:results, results:render.join("")})
