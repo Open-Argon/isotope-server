@@ -27,5 +27,5 @@ let package(req, res) = do
         if (version == versioni) continue
         let URL = "/package?"+url.queryStr({name:name, version:versioni})
         versions.append("<a href='"+URL+"'>"+bleach.clean(name+"@"+versioni)+"</a>")
-    res.renderTemplate("package.html", {name:name, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
+    res.renderTemplate("package.html", {name:name, version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
 app.route("/package", null, package)
