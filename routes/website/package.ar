@@ -21,7 +21,7 @@ let package(req, res) = do
         return
     let versions = []
     let keys = package.versions.keys()
-    keys.sort()
+    keys.sort(true)
     for (i from 0 to keys.length) do
         let versioni = keys[i]
         if (version == versioni) continue
