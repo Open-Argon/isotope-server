@@ -4,8 +4,8 @@ import "../save" as *
 import "url.ar" as urllib
 
 let search(req, res) = do
-    let name = req.query.name
-    let version = req.query.version
+    let name = req.query.get("name", null)
+    let version = req.query.get("version", "latest")
     let package = packages.get(name)
     if (package == null) do
         res.code = 404

@@ -4,11 +4,7 @@ import "url.ar" as url
 import "bleach.ar" as bleach
 
 let search(req, res) = do
-    if ("q" not in req.query) do
-        res.code = 400
-        res.send("Missing query")
-        return
-    let query = req.query.q
+    let query = req.query.get("q", "")
     let keys = packages.keys()
     keys.sort()
     let render = []

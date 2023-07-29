@@ -5,7 +5,7 @@ import "bleach.ar" as bleach
 import "shlex.ar" as shlex
 
 let package(req, res) = do
-    let name = req.query.name
+    let name = req.query.get("name", null)
     let version = req.query.get("version", "latest")
     let commandName = name
     if (version != "latest") commandName = commandName + "@"+version

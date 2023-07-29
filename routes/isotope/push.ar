@@ -3,8 +3,16 @@ import "../randstr" as *
 import "../save" as *
 
 let push(req, res) = do
-    let name = req.formdata.name
-    let version = req.formdata.version
+    let name = req.formdata.get("name", null)
+    if (name == null) do
+        res.code = 400
+        res.send("Missing name")
+        return
+    let version = req.formdata.get("version", null)
+    if (version == null) do
+        res.code = 400
+        res.send("Missing version")
+        return
     let file = req.files.file
     let latest = req.formdata.latest
     let package = packages.get(name)
