@@ -24,7 +24,10 @@ let package(req, res) = do
         return
     let versions = []
     let keys = package.versions.keys()
-    keys.sort(false, (v)=package.order.get(v, 0))
+    let sortFunc(v) = do
+        term.log(package.order.get(v, 0))
+        return package.order.get(v, 0)
+    keys.sort(false, sortFunc)
     for (i from 0 to keys.length) do
         let versioni = keys[i]
         if (version == versioni) continue
