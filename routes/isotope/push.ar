@@ -32,7 +32,7 @@ let push(req, res) = do
     path.mkAllDir(directory)
     file.save(p)
     currentVersion.filename = filename
-    package.order[version] = time.now()
+    package.order[version] = time.now().unix()
     if (latest == "true") do
         package.versions['latest'] = {redirect: version}
     changes.n = changes.n + 1
