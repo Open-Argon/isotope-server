@@ -1,3 +1,4 @@
+term.time("load")
 import "server" as *
 import "config" as *
 import "save"
@@ -12,4 +13,8 @@ import "routes/isotope/push"
 import "routes/isotope/search"
 import "routes/isotope/download"
 
+
+import "routes/404"
+
+term.timeEnd("load")
 app.run()

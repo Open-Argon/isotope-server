@@ -9,14 +9,16 @@ let push(req, res) = do
     let latest = req.formdata.latest
     let package = packages.get(name)
     if (package == null) do
-        package = {versions:{}, name:name}
+        package = {versions:{}, order:{}, name:name}
         latest = "true"
         packages[name] = package
+    if ("order" not in package) package.order = {}
     let currentVersion = package.versions.get(version)
     let directory = path.join([program.cwd, "packages", name])
     if (currentVersion == null) do
         currentVersion = {name:name, version:version}
         package.versions[version] = currentVersion
+        package.order[version] = time.now()
     let filename = version+".tar.gz"
     let p = path.join([directory, filename])
     term.log(directory)
@@ -25,6 +27,7 @@ let push(req, res) = do
     currentVersion.filename = filename
     if (latest == "true") do
         package.versions['latest'] = {redirect: version}
+        package.order['latest'] = time.now()
     changes.n = changes.n + 1
     res.send("OK")
 app.route("/isotope-push", ['POST'], push)

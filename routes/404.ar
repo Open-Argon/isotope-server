@@ -1,0 +1,6 @@
+import "../server" as *
+
+let err404(req, res) = do
+    res.code = 404
+    res.renderTemplate("404.html", {})
+app.use(err404)
