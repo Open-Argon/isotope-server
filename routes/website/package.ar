@@ -24,14 +24,13 @@ let package(req, res) = do
         return
     let versions = []
     let keys = package.versions.keys()
-    let sortFunc(v) = do
-        if (v == "latest") return infinity
-        return package.order.get(v, 0)
-    keys.sort(false, sortFunc)
+    keys.sort(false, (v)=package.order.get(v, 0))
     for (i from 0 to keys.length) do
         let versioni = keys[i]
         if (version == versioni) continue
         let URL = "/package?"+url.queryStr({name:name, version:versioni})
-        versions.append("<a href='"+URL+"'>"+bleach.clean(name+"@"+versioni)+"</a>")
+        let html = "<a href='"+URL+"'>"+bleach.clean(name)+"</a>"
+        if (versioni == "latest") versions.prepend(html)
+        else versions.append(html)
     res.renderTemplate("package.html", {name:name, version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
 app.route("/package", null, package)
