@@ -29,7 +29,7 @@ let package(req, res) = do
         let versioni = keys[i]
         if (version == versioni) continue
         let URL = "/package?"+url.queryStr({name:name, version:versioni})
-        let html = "<a href='"+URL+"'>"+bleach.clean(name)+"</a>"
+        let html = "<a href='"+URL+"'>"+bleach.clean(name+"@"+versioni)+"</a>"
         if (versioni == "latest") versions.insert(0, html)
         else versions.append(html)
     res.renderTemplate("package.html", {name:name, version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
