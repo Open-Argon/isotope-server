@@ -26,7 +26,7 @@ let push(req, res) = do
     if (currentVersion == null) do
         currentVersion = {name:name, version:version}
         package.versions[version] = currentVersion
-        package.order[version] = time.now()
+    package.order[version] = time.now()
     let filename = version+".tar.gz"
     let p = path.join([directory, filename])
     term.log(directory)
