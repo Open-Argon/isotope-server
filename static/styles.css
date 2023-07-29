@@ -153,6 +153,10 @@ input:focus {
     border: 1px solid var(--primary);
 }
 
+.selected {
+    color: var(--accent) !important;
+}
+
 pre {
     background-color: var(--secondary);
     border-radius: 10px;
