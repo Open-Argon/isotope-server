@@ -27,7 +27,7 @@ let package(req, res) = do
     let sortFunc(v) = do
         if (v == "latest") return infinity
         return package.order.get(v, 0)
-    keys.sort(true, sortFunc)
+    keys.sort(false, sortFunc)
     for (i from 0 to keys.length) do
         let versioni = keys[i]
         if (version == versioni) continue
