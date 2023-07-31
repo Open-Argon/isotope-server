@@ -1,6 +1,6 @@
-import "../server" as *
-import "../config" as config
-import "../save" as *
+import "server" as *
+import "config" as config
+import "database" as *
 import "url.ar" as urllib
 
 let search(req, res) = do

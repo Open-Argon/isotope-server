@@ -1,4 +1,5 @@
-import "../server" as *
+import "server" as *
+import "database" as *
 
 let err404(req, res) = do
     res.code = 404

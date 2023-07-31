@@ -1,4 +1,5 @@
-import "../server" as *
+import "server" as *
+import "database" as *
 
 let home(req, res) = do
     res.renderTemplate("index.html", {})

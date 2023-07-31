@@ -1,0 +1,9 @@
+import "server" as *
+import "database" as *
+import "url.ar" as url
+
+let account(req, res) = do
+    let acc = account.getByToken(req.cookies.get("token", ""))
+    if (not acc) return res.redirect("/login?"+url.queryStr({to:req.path}))
+    res.renderTemplate("account.html", {})
+app.route("/account", null, account)

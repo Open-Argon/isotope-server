@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Search - Isotope</title>
+        <title>Login - Isotope</title>
         <link rel="stylesheet" type="text/css" href="/styles.css" />
         <meta
             name="viewport"
@@ -49,20 +49,26 @@
     <body>
         <div class="content">
             {{%navbar}}
-            <div>
-                <form action="/search" method="GET" class="search">
-                    <input
-                        type="text"
-                        name="q"
-                        placeholder="Search for a package"
-                        class="bar"
-                        value="{{query}}"
-                    />
-                    <input type="submit" value="Search" class="button" />
-                </form>
-                <h2>{{numOfResults}} result(s) for '{{query}}'</h2>
-                <div class="results">{{%results}}</div>
-            </div>
+            <form class="authForm" method="post" action="/login">
+                <h1>Login</h1>
+                <input
+                    type="text"
+                    name="user"
+                    placeholder="Username or email address"
+                    value="{{user}}"
+                    required
+                    class="input"
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    required
+                    class="input"
+                />
+                <p class="error">{{errorMsg}}</p>
+                <input type="submit" value="Login" class="submit" />
+            </form>
         </div>
     </body>
 </html>

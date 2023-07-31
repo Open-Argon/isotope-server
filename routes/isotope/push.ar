@@ -1,6 +1,6 @@
-import "../server" as *
-import "../randstr" as *
-import "../save" as *
+import "server" as *
+import "randstr" as *
+import "database" as *
 
 let push(req, res) = do
     let name = req.formdata.get("name", null)
@@ -35,6 +35,6 @@ let push(req, res) = do
     package.order[version] = time.now().unix()
     if (latest == "true") do
         package.versions['latest'] = {redirect: version}
-    changes.n = changes.n + 1
+    makeChange()
     res.send("OK")
 app.route("/isotope-push", ['POST'], push)

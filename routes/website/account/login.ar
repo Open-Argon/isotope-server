@@ -1,0 +1,22 @@
+import "server" as *
+import "database" as *
+
+let login(req, res) = do
+    let redirect = req.query.get("to", "/")
+    if (redirect == "/login") redirect = "/"
+    let acc = account.getByToken(req.cookies.get("token", ""))
+    if (acc) do
+        return res.redirect(redirect)
+    else if (req.method == "POST") do
+        let user = req.formdata.get("user")
+        let password = req.formdata.get("password")
+        let errResp(err) = res.renderTemplate("login.html", {errorMsg:err, user:user})
+        if (not user) return errResp("Missing user")
+        else if (not password) return errResp("Missing password")
+        let acc = account.login(user, password)
+        if ("error" in acc) return errResp(acc.error)
+        res.setCookie("token", {value:acc.token, path:"/"})
+        res.redirect(redirect)
+        return
+    res.renderTemplate("login.html", {})
+app.route("/login", ["GET", "POST"], login)

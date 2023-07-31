@@ -1,9 +1,11 @@
-import "../server" as *
-import "../save" as *
+import "server" as *
+import "database" as *
 import "url.ar" as url
 import "bleach.ar" as bleach
+import "render" as renderer
 
 let search(req, res) = do
+    let acc = account.getByToken(req.cookies.get("token", ""))
     let query = req.query.get("q", "")
     let keys = packages.keys()
     keys.sort()
@@ -15,5 +17,5 @@ let search(req, res) = do
         if (query.lower() in name.lower()) do
             render.append("<a href='/package?"+url.queryStr({name:name})+"'>"+bleach.clean(name)+"</a>")
             results = results + 1
-    res.renderTemplate("search.html", {query:query, numOfResults:results, results:render.join("")})
+    res.renderTemplate("search.html", {query:query, numOfResults:results, results:render.join(""), navbar:renderer.navbar(acc)})
 app.route("/search", null, search)

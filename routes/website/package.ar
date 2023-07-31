@@ -1,29 +1,39 @@
-import "../server" as *
-import "../save" as *
+import "server" as *
+import "database" as *
 import "url.ar" as url
 import "bleach.ar" as bleach
 import "shlex.ar" as shlex
+import "render" as render
 
 let package(req, res) = do
-    let name = req.query.get("name", null)
+    let acc = account.getByToken(req.cookies.get("token", ""))
+    let name = req.query.get("name")
+    if (not name) do
+        res.code = 404
+        res.renderTemplate("404.html", {})
+        return
+
     let version = req.query.get("version", "latest")
     let commandName = name
     if (version != "latest") commandName = commandName + "@"+version
     let command = shlex.join(["isotope", "install", commandName])
     let package = packages.get(name)
-    if (package == null) do
+    if (package == null && version == "latest") do
+        package = {versions:{}, order:{}, name:name}
+    else if (package == null) do
         res.code = 404
         res.renderTemplate("404.html", {})
         return
     if ("order" not in package) do
         package.order = {}
-        changes.n = changes.n + 1
-    if (version not in package.versions) do
+        makeChange()
+    if (version not in package.versions && version != "latest") do
         res.code = 404
         res.renderTemplate("404.html", {})
         return
     let versions = []
     let keys = package.versions.keys()
+    keys.sort()
     keys.sort(true, (v) = package.order.get(v, 0))
     for (i from 0 to keys.length) do
         let versioni = keys[i]
