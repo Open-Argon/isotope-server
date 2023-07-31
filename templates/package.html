@@ -63,7 +63,26 @@
             {{%navbar}}
             <div>
                 <h1>{{name}}@{{version}}</h1>
+                <pre class="description-pre">{{description}}</pre>
+                <div class="split"></div>
+                <div class="atributes">
+                    <div>
+                        <h2>Author</h2>
+                        <a href="{{authorPage}}">{{author}}</a>
+                    </div>
+                    <div>
+                        <h2>Repository</h2>
+                        <a href="{{repository}}">{{repository}}</a>
+                    </div>
+                    <div>
+                        <h2>License</h2>
+                        <p>{{license}}</p>
+                    </div>
+                </div>
+                <div class="split"></div>
+                <h2>Installation</h2>
                 <pre
+                    class="copyable-pre"
                     onclick="copyToClipboard(event.target.dataset.command)"
                     data-command="{{command}}"
                 >{{command}}<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>

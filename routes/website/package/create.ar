@@ -1,0 +1,59 @@
+import "server" as *
+import "database" as *
+import "url.ar" as url
+
+let newPackage(req, res) = do
+    let acc = account.getByToken(req.cookies.get("token", ""))
+    if (req.method == "POST") do
+        if (not acc) return res.redirect("/login?"+url.queryStr({to:req.path+"?"+url.queryStr(req.formdata)}))
+        let name = req.formdata.get("name", "")
+        let shortDescription = req.formdata.get("short-description", "")
+        let description = req.formdata.get("description", "")
+        let license = req.formdata.get("license", "")
+        let repository = req.formdata.get("repository", "")
+        let keywords = req.formdata.get("keywords", "")
+        let errResp(err) = res.renderTemplate("createPackage.html", {name:name, "short-description":shortDescription, description:description, license:license, repository:repository, keywords:keywords, error:err})
+        let package = packages.get(name)
+        if (package != null) do
+            errResp("Package already exists")
+            return
+        if (name == "") do
+            errResp("Name cannot be empty")
+            return
+        if (shortDescription == "") do
+            errResp("Short description cannot be empty")
+            return
+        if (description == "") do
+            errResp("Description cannot be empty")
+            return
+        if (license == "") do
+            errResp("License cannot be empty")
+            return
+        if (repository == "") do
+            errResp("Repository cannot be empty")
+            return
+        if (keywords == "") do
+            errResp("Keywords cannot be empty")
+            return
+        if (not validName(name)) do
+            errResp("Invalid name")
+            return
+        let keywordsList = keywords.split(",")
+        let keywordsList2 = []
+        for (i from 0 to keywordsList.length) do
+            let keyword = keywordsList[i]
+            if (keyword != "") keywordsList2.append(keyword)
+        keywordsList = keywordsList2
+        let package = {name:name, "short-description":shortDescription, description:description, license:license, repository:repository, keywords:keywordsList, owner:acc.id, versions:{}, order:{}}
+        packages[name] = package
+        makeChange()
+        return res.redirect("/package?"+url.queryStr({name:name}))
+    let values = {}
+    values.name = req.query.get("name", "")
+    values["short-description"] = req.query.get("short-description", "")
+    values.description = req.query.get("description", "")
+    values.license = req.query.get("license", "")
+    values.repository = req.query.get("repository", "")
+    values.keywords = req.query.get("keywords", "")
+    res.renderTemplate("createPackage.html", values)
+app.route("/package/create", ["GET", "POST"], newPackage)

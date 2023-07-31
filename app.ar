@@ -1,22 +1,27 @@
 term.time("load")
 import "server" as *
 import "config" as *
+import "render" as render
 import "database"
-
-# website
-import "routes/website/home"
-import "routes/website/search"
-import "routes/website/package"
-
-# account
-import "routes/website/account/login"
-import "routes/website/account/logout"
-import "routes/website/account/account"
 
 # isotope
 import "routes/isotope/push"
 import "routes/isotope/search"
 import "routes/isotope/download"
+
+# middleware
+app.use(render.middleware)
+
+# website
+import "routes/website/home"
+import "routes/website/search"
+import "routes/website/package"
+import "routes/website/package/create"
+
+# account
+import "routes/website/account/login"
+import "routes/website/account/logout"
+import "routes/website/account/account"
 
 # error pages
 import "routes/404"

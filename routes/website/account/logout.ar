@@ -4,7 +4,7 @@ import "database" as *
 let logout(req, res) = do
     let redirect = req.query.get("to", "/login")
     if (redirect == "/logout") redirect = "/login"
-    account.deleteToken(req.cookies.get("token", ""))
+    term.log(account.deleteToken(req.cookies.get("token", "")))
     res.deleteCookie("token")
     res.redirect(redirect)
 app.route("/logout", null, logout)

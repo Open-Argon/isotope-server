@@ -17,9 +17,15 @@ let push(req, res) = do
     let latest = req.formdata.latest
     let package = packages.get(name)
     if (package == null) do
-        package = {versions:{}, order:{}, name:name}
-        latest = "true"
-        packages[name] = package
+        res.code = 404
+        return res.send("Package not found")
+    let acc = account.getByToken(req.headers.get("isotope-auth", ""))
+    if (acc == null) do
+        res.code = 403
+        return res.send("You are not logged in")
+    if (acc.id != package.owner) do
+        res.code = 403
+        return res.send("You are not the owner of this package")
     if ("order" not in package) package.order = {}
     let currentVersion = package.versions.get(version)
     let directory = path.join([program.cwd, "packages", name])
