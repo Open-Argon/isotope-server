@@ -206,7 +206,8 @@ input:focus {
 
 .description {
     font-family: 'Trebuchet MS';
-    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .form {
@@ -291,6 +292,7 @@ input:focus {
     .package .versions {
         max-width: 100%;
     }
+
     .package {
         flex-direction: column;
     }
