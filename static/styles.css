@@ -204,8 +204,9 @@ input:focus {
     word-wrap: break-word;
 }
 
-.description-pre {
+.description {
     font-family: 'Trebuchet MS';
+    white-space: pre;
 }
 
 .form {
@@ -266,4 +267,31 @@ input:focus {
 
 .atributes div {
     margin: 1rem 0;
+}
+
+.package {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.package .info {
+    width: 100%;
+}
+
+.package .versions {
+    width: 100%;
+    max-width: 250px;
+}
+
+@media (max-width: 750px) {
+    .package .versions {
+        max-width: 100%;
+    }
+    .package {
+        flex-direction: column;
+    }
 }

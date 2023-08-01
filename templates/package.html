@@ -48,37 +48,45 @@
         <script src="/script.js"></script>
         <meta name="description" content="{{short-description}}" />
         <meta name="keywords" content="{{keywords}}" />
+        <meta property="og:title" content="{{name}}@{{version}}" />
+        <meta property="og:image" content="/android-chrome-512x512.png" />
+        <meta property="og:description" content="{{short-description}}" />
+        <meta name="twitter:card" content="Isotope Package Manager" />
     </head>
     <body>
         <div class="content">
             {{%navbar}}
-            <div>
-                <h1>{{name}}@{{version}}</h1>
-                <pre class="description-pre">{{description}}</pre>
-                <div class="split"></div>
-                <div class="atributes">
-                    <div>
-                        <h2>Author</h2>
-                        <a href="{{authorPage}}">{{author}}</a>
+            <div class="package">
+                <div class="info">
+                    <h1>{{name}}@{{version}}</h1>
+                    <div class="description">{{description}}</div>
+                    <div class="split"></div>
+                    <div class="atributes">
+                        <div>
+                            <h2>Author</h2>
+                            <a href="{{authorPage}}">{{author}}</a>
+                        </div>
+                        <div>
+                            <h2>Repository</h2>
+                            <a href="{{repository}}">{{repository}}</a>
+                        </div>
+                        <div>
+                            <h2>License</h2>
+                            <p>{{license}}</p>
+                        </div>
                     </div>
-                    <div>
-                        <h2>Repository</h2>
-                        <a href="{{repository}}">{{repository}}</a>
-                    </div>
-                    <div>
-                        <h2>License</h2>
-                        <p>{{license}}</p>
-                    </div>
+                    <div class="split"></div>
+                    <h2>Installation</h2>
+                    <pre
+                        class="copyable-pre"
+                        onclick="copyToClipboard(event.target.dataset.command)"
+                        data-command="{{command}}"
+                    >{{command}}<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
                 </div>
-                <div class="split"></div>
-                <h2>Installation</h2>
-                <pre
-                    class="copyable-pre"
-                    onclick="copyToClipboard(event.target.dataset.command)"
-                    data-command="{{command}}"
-                >{{command}}<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
-                <h2>Versions</h2>
-                <div class="results">{{%versions}}</div>
+                <div class="versions">
+                    <h2>Versions</h2>
+                    <div class="results">{{%versions}}</div>
+                </div>
             </div>
         </div>
     </body>
