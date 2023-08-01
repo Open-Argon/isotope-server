@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <title>Isotope</title>
+        <title>authenticate - Isotope</title>
         <link rel="stylesheet" type="text/css" href="/styles.css" />
         <meta
             name="viewport"
@@ -45,19 +45,33 @@
         <meta name="msapplication-TileColor" content="#0b1d28" />
         <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
         <meta name="theme-color" content="#0b1d28" />
+        <script>
+            function copyToClipboard(text) {
+                navigator.clipboard
+                    .writeText(text)
+                    .then(() => {
+                        console.log(`Copied text to clipboard: ${text}`);
+                    })
+                    .catch((error) => {
+                        console.error(`Could not copy text: ${error}`);
+                    });
+            }
+        </script>
     </head>
     <body>
         <div class="content">
-            {{%navbar}}
-            <div>
-                <h1>Account</h1>
-                <p>Logged in as {{username}}</p>
-                <a href="/logout">Logout</a>
-                <form method="post" action="/account/auth" class="form">
-                    <h2>Authenticate Isotope</h2>
-                    <input class="submit" type="submit" value="Authenticate Isotope" />
-                </form>
-            </div>
+           {{%navbar}}
+           <div>
+                <h1>Authenticate Isotope</h1>
+                <p>In order to be able to push packages to the isotope servers under your name, you must authenticate your isotope account to isotope running on your computer.</p>
+                <h2>Auth Command</h2>
+                <pre
+                    class="copyable-pre"
+                    onclick="copyToClipboard(event.target.dataset.command)"
+                    data-command="{{command}}"
+                >{{command}}<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
+                <p>this authentication will be valid until either you run <pre>{{deleteCommand}}</pre> or the password on your account is changed.</p>
+           </div>
         </div>
     </body>
 </html>

@@ -198,6 +198,10 @@ input:focus {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 
 .description-pre {
@@ -256,9 +260,10 @@ input:focus {
     background-color: var(--primary);
 }
 
-.atributes div > * {
+.atributes div>* {
     margin: 0;
 }
+
 .atributes div {
     margin: 1rem 0;
 }
