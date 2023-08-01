@@ -45,18 +45,7 @@
         <meta name="msapplication-TileColor" content="#0b1d28" />
         <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
         <meta name="theme-color" content="#0b1d28" />
-        <script>
-            function copyToClipboard(text) {
-                navigator.clipboard
-                    .writeText(text)
-                    .then(() => {
-                        console.log(`Copied text to clipboard: ${text}`);
-                    })
-                    .catch((error) => {
-                        console.error(`Could not copy text: ${error}`);
-                    });
-            }
-        </script>
+        <script src="/script.js"></script>
     </head>
     <body>
         <div class="content">

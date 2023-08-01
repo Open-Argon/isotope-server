@@ -12,7 +12,7 @@ let register(req, res) = do
         let username = req.formdata.get("username")
         let email = req.formdata.get("email")
         let password = req.formdata.get("password")
-        let errResp(err) = res.renderTemplate("register.html", {errorMsg:err, username:user, email:email})
+        let errResp(err) = res.renderTemplate("register.html", {errorMsg:err, username:username, email:email})
         if (not username) return errResp("Missing username")
         else if (not email) return errResp("Missing email")
         else if (not password) return errResp("Missing password")
