@@ -9,7 +9,7 @@ let validName(name) = do
     if (name.length < 3) return false
     if (name.length > 32) return false
     for (i from 0 to name.length) do
-        if (name[i] not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-") return false
+        if (name[i] not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.") return false
     return true
 
 let makeChange() = changes.n = changes.n + 1

@@ -23,6 +23,7 @@ import "routes/website/account/auth"
 import "routes/website/account/login"
 import "routes/website/account/logout"
 import "routes/website/account/account"
+import "routes/website/account/register"
 
 # error pages
 import "routes/404"
