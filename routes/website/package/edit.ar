@@ -1,0 +1,61 @@
+import "server" as *
+import "database" as *
+import "url.ar" as url
+
+let editPackage(req, res) = do
+    let acc = account.getByToken(req.cookies.get("token", ""))
+    if (not acc) return res.redirect("/login?"+url.queryStr({to:req.path+"?"+url.queryStr(req.formdata)}))
+    let name = req.query.get("name", "")
+    let pkg = packages.get(name)
+    if ((not pkg) || pkg.owner != acc.id) do
+        res.code = 404
+        res.renderTemplate("404.html", {})
+        return
+    if (req.method == "POST") do
+        let shortDescription = req.formdata.get("short-description", "")
+        let description = req.formdata.get("description", "")
+        let license = req.formdata.get("license", "")
+        let repository = req.formdata.get("repository", "")
+        let keywords = req.formdata.get("keywords", "")
+        let errResp(err) = res.renderTemplate("editPackage.html", {name:name, "short-description":shortDescription, description:description, license:license, repository:repository, keywords:keywords, error:err})
+        let package = packages.get(name)
+        if (package == null) do
+            errResp("Package does not exist")
+            return
+        if (shortDescription == "") do
+            errResp("Short description cannot be empty")
+            return
+        if (description == "") do
+            errResp("Description cannot be empty")
+            return
+        if (license == "") do
+            errResp("License cannot be empty")
+            return
+        if (repository == "") do
+            errResp("Repository cannot be empty")
+            return
+        if (keywords == "") do
+            errResp("Keywords cannot be empty")
+            return
+        let keywordsList = keywords.split(",")
+        let keywordsList2 = []
+        for (i from 0 to keywordsList.length) do
+            let keyword = keywordsList[i]
+            if (keyword != "") keywordsList2.append(keyword)
+        keywordsList = keywordsList2
+        packages[name]["short-description"] = shortDescription
+        packages[name]["description"] = description
+        packages[name]["license"] = license
+        packages[name]["repository"] = repository
+        packages[name]["keywords"] = keywordsList
+        makeChange()
+        return res.redirect("/package?"+url.queryStr({name:name}))
+    let values = {}
+    values.name = name
+    values["short-description"] = pkg["short-description"]
+    values.description = pkg["description"]
+    values.license = pkg["license"]
+    values.repository = pkg["repository"]
+    values.keywords = pkg["keywords"].join(", ")
+    res.renderTemplate("editPackage.html", values)
+app.route("/package/edit", ["GET", "POST"], editPackage)

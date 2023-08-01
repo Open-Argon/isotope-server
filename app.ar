@@ -16,6 +16,7 @@ app.use(render.middleware)
 import "routes/website/home"
 import "routes/website/search"
 import "routes/website/package"
+import "routes/website/package/edit"
 import "routes/website/package/create"
 
 # account
