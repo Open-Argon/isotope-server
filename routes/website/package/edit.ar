@@ -40,7 +40,7 @@ let editPackage(req, res) = do
         let keywordsList = keywords.split(",")
         let keywordsList2 = []
         for (i from 0 to keywordsList.length) do
-            let keyword = keywordsList[i]
+            let keyword = keywordsList[i].strip()
             if (keyword != "") keywordsList2.append(keyword)
         keywordsList = keywordsList2
         packages[name]["short-description"] = shortDescription

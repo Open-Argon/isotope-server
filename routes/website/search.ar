@@ -26,8 +26,10 @@ let search(req, res) = do
             results = results + 1
             continue
         let keywords = package.get("keywords", [])
+        term.log(keywords)
         for (j from 0 to keywords.length) do
             let keyword = keywords[j]
+            term.log(keyword.lower(), lowerQuery)
             if (keyword.lower() in lowerQuery) do
                 descriptionSearch.append(element())
                 results = results + 1
