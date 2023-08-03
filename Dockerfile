@@ -1,9 +1,11 @@
 FROM ugric/argon
 
-WORKDIR /app
+WORKDIR /isotope-server
 
 COPY . .
 
 RUN isotope install
+
+RUN mkdir data
 
 CMD [ "argon", "." ]

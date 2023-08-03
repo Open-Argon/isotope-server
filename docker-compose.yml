@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  server:
+    image: 'ugric/isotope-server:latest'
+    ports:
+      - '7030:7030'
+    volumes:
+      - './data:/isotope-server/data'
