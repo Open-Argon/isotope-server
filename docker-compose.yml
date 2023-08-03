@@ -7,3 +7,8 @@ services:
       - '7030:7030'
     volumes:
       - './data:/isotope-server/data'
+    environment:
+      - URL=https://isotope.wbell.dev
+      - domain=isotope.wbell.dev
+      - PORT=7031
+    restart: unless-stopped

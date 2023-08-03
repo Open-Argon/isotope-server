@@ -8,3 +8,4 @@ argon_modules
 
 # main
 data
+.env

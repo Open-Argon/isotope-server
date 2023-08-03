@@ -1,2 +1,8 @@
-let url = "http://isotope.wbell.dev"
-let domain = "isotope.wbell.dev"
+let url = env.get("URL","https://isotope.wbell.dev")
+term.log("URL: "+url)
+let domain = env.get("domain","isotope.wbell.dev")
+term.log("domain: "+domain)
+let port = number(env.get("PORT", 8080))
+term.log("port: "+port)
+
+term.log(env)

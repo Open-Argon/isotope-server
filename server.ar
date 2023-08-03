@@ -1,4 +1,5 @@
 import "http.ar" as http
+import "config" as config
 
 let app = http.server()
 
@@ -6,4 +7,4 @@ app.use(http.logger)
 app.use(http.cookie)
 app.use(http.formdata)
 app.use(http.static("/","static"))
-app.port = 7030
+app.port = config.port
