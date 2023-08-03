@@ -10,5 +10,5 @@ services:
     environment:
       - URL=https://isotope.wbell.dev
       - domain=isotope.wbell.dev
-      - PORT=7031
+      - PORT=7030
     restart: unless-stopped
