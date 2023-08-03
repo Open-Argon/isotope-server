@@ -18,6 +18,6 @@ let search(req, res) = do
             continue
         break
     let filename = currentVersion.get("filename")
-    let p = path.join([program.cwd,"packages", name, filename])
+    let p = path.join([program.cwd, "data","packages", name, filename])
     res.sendFile(p)
 app.route("/isotope-download", null, search)

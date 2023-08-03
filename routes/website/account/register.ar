@@ -19,7 +19,7 @@ let register(req, res) = do
         let acc = account.create(username, email, password)
         if ("error" in acc) return errResp(acc.error)
         let token = account.makeToken(acc)
-        res.setCookie("token", {value:token, path:"/"})
+        res.setCookie("token", {value:token, path:"/", expires:time.unix(time.now().unix()+3.156e+9, 0).format()})
         res.redirect(redirect)
         return
     res.renderTemplate("register.html", {})
