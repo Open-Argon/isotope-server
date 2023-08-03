@@ -7,6 +7,4 @@ __isotope__
 argon_modules
 
 # main
-packages
-packages-db.json
-dockerData
+data

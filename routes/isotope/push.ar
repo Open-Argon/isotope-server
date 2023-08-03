@@ -29,7 +29,7 @@ let push(req, res) = do
     if ("order" not in package) package.order = {}
     if (package.versions.keys().length == 0) latest = "true"
     let currentVersion = package.versions.get(version)
-    let directory = path.join([program.cwd, "packages", name])
+    let directory = path.join([program.cwd, "data", "packages", name])
     if (currentVersion == null) do
         currentVersion = {name:name, version:version}
         package.versions[version] = currentVersion
