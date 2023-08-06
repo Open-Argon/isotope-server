@@ -12,7 +12,7 @@ let validName(name) = do
         if (name[i] not in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.") return false
     return true
 
-let makeChange() = changes.n = changes.n + 1
+let makeChange() = changes.n += 1
 
 let randstr(length) = do
     let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"

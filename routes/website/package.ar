@@ -15,7 +15,7 @@ let package(req, res) = do
 
     let version = req.query.get("version", "latest")
     let commandName = name
-    if (version != "latest") commandName = commandName + "@"+version
+    if (version != "latest") commandName += "@"+version
     let command = shlex.join(["isotope", "install", commandName])
     let package = packages.get(name)
     if (package == null && version == "latest") do

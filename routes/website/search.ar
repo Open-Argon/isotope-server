@@ -19,18 +19,18 @@ let search(req, res) = do
         let element() = "<a href='/package?"+url.queryStr({name:name})+"'><h1>"+bleach.clean(name)+"</h1><p>"+bleach.clean(package.get("short-description",""))+"</p></a>"
         if (lowerQuery in name.lower()) do
             namedSearch.append(element())
-            results = results + 1
+            results += 1
             continue
         else if (lowerQuery in package.get("description", "").lower()) do
             descriptionSearch.append(element())
-            results = results + 1
+            results += 1
             continue
         let keywords = package.get("keywords", [])
         for (j from 0 to keywords.length) do
             let keyword = keywords[j].strip()
             if (keyword.lower() in lowerQuery) do
                 descriptionSearch.append(element())
-                results = results + 1
+                results += 1
                 break
     let render = []
     render.extend(namedSearch)

@@ -2,7 +2,7 @@ let url = env.get("URL","https://isotope.wbell.dev")
 term.log("URL: "+url)
 let domain = env.get("domain","isotope.wbell.dev")
 term.log("domain: "+domain)
-let port = number(env.get("PORT", 8080))
+let port = number(env.get("PORT", 7030))
 term.log("port: "+port)
 
 term.log(env)

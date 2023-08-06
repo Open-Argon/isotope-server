@@ -3,5 +3,5 @@ let randstr(length) = do
     let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
     let id = ""
     for (i from 0 to length) do
-        id = id + chars[random.int(0, chars.length-1)]
+        id += chars[random.int(0, chars.length-1)]
     return id
