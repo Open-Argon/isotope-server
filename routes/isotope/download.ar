@@ -19,6 +19,6 @@ let download(req, res) = do
         break
     let filename = currentVersion.get("filename")
     let p = path.join([program.cwd, "data","packages", name, filename])
+    package.downloads = package.get("downloads", 0) + 1
     res.sendFile(p)
-    package.download = package.get("download", 0) + 1
 app.route("/isotope-download", null, download)
