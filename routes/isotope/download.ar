@@ -2,7 +2,7 @@ import "server" as *
 import "config" as *
 import "database" as *
 
-let search(req, res) = do
+let download(req, res) = do
     let name = req.query.get("name", null)
     let version = req.query.get("version", "latest")
     let package = packages.get(name)
@@ -20,4 +20,5 @@ let search(req, res) = do
     let filename = currentVersion.get("filename")
     let p = path.join([program.cwd, "data","packages", name, filename])
     res.sendFile(p)
-app.route("/isotope-download", null, search)
+    package.download = package.get("download", 0) + 1
+app.route("/isotope-download", null, download)

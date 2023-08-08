@@ -1,0 +1,17 @@
+let commaSeperatedNumber(n) = do
+    if (n % 1 != 0) do
+        throwError("Runtime Error","commaSeperatedNumber only accepts integers")
+    num_str = fraction(n)[:-2]
+    result = ""
+    
+    if (num_str[0] == '-') do
+        result += "-"
+        num_str = num_str[1:]
+
+    length = num_str.length
+    for (i from 0 to length) do
+        result += num_str[i]
+        if ((length - i - 1) % 3 == 0 && i != length - 1) do
+            result += ","
+
+    return result

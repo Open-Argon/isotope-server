@@ -4,6 +4,7 @@ import "url.ar" as url
 import "bleach.ar" as bleach
 import "shlex.ar" as shlex
 import "render" as render
+import "commaNumbers" as *
 
 let package(req, res) = do
     let acc = account.getByToken(req.cookies.get("token", ""))
@@ -44,5 +45,5 @@ let package(req, res) = do
         if (versioni == "latest") versions.insert(0, html)
         else versions.append(html)
     let author = account.getById(package.get("owner")) || {username:"Unknown", id:""}
-    res.renderTemplate("package.html", {name:name, description: package.get("description", ""), 'short-description': package.get("short-description", ""), keywords:package.get("keywords", []).join(', '), repository:package.get("repository", "https://github.com/"), license: package.get("license", "Unspecified"), author: author.username, authorPage: '/author?'+url.queryStr({id:author.id}), version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
+    res.renderTemplate("package.html", {name:name, description: package.get("description", ""), 'short-description': package.get("short-description", ""), 'downloads': commaSeperatedNumber(package.get("downloads", 0)), keywords:package.get("keywords", []).join(', '), repository:package.get("repository", "https://github.com/"), license: package.get("license", "Unspecified"), author: author.username, authorPage: '/author?'+url.queryStr({id:author.id}), version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
 app.route("/package", null, package)

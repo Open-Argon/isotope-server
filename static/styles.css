@@ -284,12 +284,14 @@ input:focus {
 }
 
 .package .versions {
+    margin: 0 1rem;
     width: 100%;
     max-width: 250px;
 }
 
 @media (max-width: 750px) {
     .package .versions {
+        margin: 1rem 0;
         max-width: 100%;
     }
 
