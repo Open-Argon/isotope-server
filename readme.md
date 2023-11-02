@@ -1,6 +1,6 @@
 # Isotope Package Manager
 
-Isotope is a package manager designed to simplify the process of managing and distributing software packages. This repository contains the server component of Isotope, implemented in the Argon programming language.
+Isotope is a package manager designed to simplify the process of managing and distributing argon packages. This repository contains the server component of Isotope, implemented in the Argon programming language.
 
 ## Deploy Your Own Isotope Server
 
