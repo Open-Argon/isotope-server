@@ -1,8 +1,8 @@
-let url = env.get("URL","https://isotope.wbell.dev")
+let url = env.get_value("URL","https://isotope.wbell.dev")
 term.log("URL: "+url)
-let domain = env.get("domain","isotope.wbell.dev")
+let domain = env.get_value("domain","isotope.wbell.dev")
 term.log("domain: "+domain)
-let port = number(env.get("PORT", 7030))
+let port = number(env.get_value("PORT", 7030))
 term.log("port: "+port)
 
 let env_keys = env.keys()

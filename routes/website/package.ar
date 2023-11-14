@@ -7,18 +7,18 @@ import "render" as render
 import "commaNumbers" as *
 
 let package(req, res) = do
-    let acc = account.getByToken(req.cookies.get("token", ""))
-    let name = req.query.get("name")
+    let acc = account.getByToken(req.cookies.get_value("token", ""))
+    let name = req.query.get_value("name")
     if (not name) do
         res.code = 404
         res.renderTemplate("404.html", {})
         return
 
-    let version = req.query.get("version", "latest")
+    let version = req.query.get_value("version", "latest")
     let commandName = name
     if (version != "latest") commandName += "@"+version
     let command = shlex.join(["isotope", "install", commandName])
-    let package = packages.get(name)
+    let package = packages.get_value(name)
     if (package == null && version == "latest") do
         package = {versions:{}, order:{}, name:name}
     else if (package == null) do
@@ -35,7 +35,7 @@ let package(req, res) = do
     let versions = []
     let keys = package.versions.keys()
     keys.sort()
-    keys.sort(true, (v) = package.order.get(v, 0))
+    keys.sort(true, (v) = package.order.get_value(v, 0))
     for (i from 0 to keys.length) do
         let versioni = keys[i]
         let URL = "/package?"+url.queryStr({name:name, version:versioni})
@@ -44,6 +44,6 @@ let package(req, res) = do
         else html = "<a href='"+URL+"'>"+bleach.clean(name+"@"+versioni)+"</a>"
         if (versioni == "latest") versions.insert(0, html)
         else versions.append(html)
-    let author = account.getById(package.get("owner")) || {username:"Unknown", id:""}
-    res.renderTemplate("package.html", {name:name, description: package.get("description", ""), 'short-description': package.get("short-description", ""), 'downloads': commaSeperatedNumber(package.get("downloads", 0)), keywords:package.get("keywords", []).join(', '), repository:package.get("repository", "https://github.com/"), license: package.get("license", "Unspecified"), author: author.username, authorPage: '/author?'+url.queryStr({id:author.id}), version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
+    let author = account.getById(package.get_value("owner")) || {username:"Unknown", id:""}
+    res.renderTemplate("package.html", {name:name, description: package.get_value("description", ""), 'short-description': package.get_value("short-description", ""), 'downloads': commaSeperatedNumber(package.get_value("downloads", 0)), keywords:package.get_value("keywords", []).join(', '), repository:package.get_value("repository", "https://github.com/"), license: package.get_value("license", "Unspecified"), author: author.username, authorPage: '/author?'+url.queryStr({id:author.id}), version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
 app.get("/package", package)

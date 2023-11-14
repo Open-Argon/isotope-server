@@ -3,23 +3,23 @@ import "randstr" as *
 import "database" as *
 
 let push(req, res) = do
-    let name = req.formdata.get("name", null)
+    let name = req.formdata.get_value("name", null)
     if (name == null) do
         res.code = 400
         res.send("Missing name")
         return
-    let version = req.formdata.get("version", null)
+    let version = req.formdata.get_value("version", null)
     if (version == null) do
         res.code = 400
         res.send("Missing version")
         return
     let file = req.files.file
     let latest = req.formdata.latest
-    let package = packages.get(name)
+    let package = packages.get_value(name)
     if (package == null) do
         res.code = 404
         return res.send("Package not found")
-    let acc = account.getByToken(req.headers.get("isotope-auth", ""))
+    let acc = account.getByToken(req.headers.get_value("isotope-auth", ""))
     if (acc == null) do
         res.code = 403
         return res.send("You are not logged in")
@@ -28,7 +28,7 @@ let push(req, res) = do
         return res.send("You are not the owner of this package")
     if ("order" not in package) package.order = {}
     if (package.versions.keys().length == 0) latest = "true"
-    let currentVersion = package.versions.get(version)
+    let currentVersion = package.versions.get_value(version)
     let directory = path.join([program.cwd, "data", "packages", name])
     if (currentVersion == null) do
         currentVersion = {name:name, version:version}

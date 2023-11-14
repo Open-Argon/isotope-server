@@ -3,7 +3,7 @@ import "database" as *
 import "url.ar" as url
 
 let accountpage(req, res) = do
-    let acc = account.getByToken(req.cookies.get("token", ""))
+    let acc = account.getByToken(req.cookies.get_value("token", ""))
     if (not acc) return res.redirect("/login?"+url.queryStr({to:req.path}))
     res.renderTemplate("account.html", {username:acc.username, email:acc.email})
 app.get("/account", accountpage)

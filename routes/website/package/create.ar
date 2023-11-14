@@ -3,17 +3,17 @@ import "database" as *
 import "url.ar" as url
 
 let newPackage(req, res) = do
-    let acc = account.getByToken(req.cookies.get("token", ""))
+    let acc = account.getByToken(req.cookies.get_value("token", ""))
     if (req.method == "POST") do
         if (not acc) return res.redirect("/login?"+url.queryStr({to:req.path+"?"+url.queryStr(req.formdata)}))
-        let name = req.formdata.get("name", "")
-        let shortDescription = req.formdata.get("short-description", "")
-        let description = req.formdata.get("description", "")
-        let license = req.formdata.get("license", "")
-        let repository = req.formdata.get("repository", "")
-        let keywords = req.formdata.get("keywords", "")
+        let name = req.formdata.get_value("name", "")
+        let shortDescription = req.formdata.get_value("short-description", "")
+        let description = req.formdata.get_value("description", "")
+        let license = req.formdata.get_value("license", "")
+        let repository = req.formdata.get_value("repository", "")
+        let keywords = req.formdata.get_value("keywords", "")
         let errResp(err) = res.renderTemplate("createPackage.html", {name:name, "short-description":shortDescription, description:description, license:license, repository:repository, keywords:keywords, error:err})
-        let package = packages.get(name)
+        let package = packages.get_value(name)
         if (package != null) do
             errResp("Package already exists")
             return
@@ -49,11 +49,11 @@ let newPackage(req, res) = do
         makeChange()
         return res.redirect("/package?"+url.queryStr({name:name}))
     let values = {}
-    values.name = req.query.get("name", "")
-    values["short-description"] = req.query.get("short-description", "")
-    values.description = req.query.get("description", "")
-    values.license = req.query.get("license", "")
-    values.repository = req.query.get("repository", "")
-    values.keywords = req.query.get("keywords", "")
+    values.name = req.query.get_value("name", "")
+    values["short-description"] = req.query.get_value("short-description", "")
+    values.description = req.query.get_value("description", "")
+    values.license = req.query.get_value("license", "")
+    values.repository = req.query.get_value("repository", "")
+    values.keywords = req.query.get_value("keywords", "")
     res.renderTemplate("createPackage.html", values)
 app.all("/package/create", newPackage)

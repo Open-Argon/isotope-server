@@ -3,22 +3,22 @@ import "config" as *
 import "database" as *
 
 let download(req, res) = do
-    let name = req.query.get("name", null)
-    let version = req.query.get("version", "latest")
-    let package = packages.get(name)
+    let name = req.query.get_value("name", null)
+    let version = req.query.get_value("version", "latest")
+    let package = packages.get_value(name)
     if (package == null) do
         res.code = 404
         res.send("Package not found")
         return
-    let currentVersion = package.versions.get(version)
+    let currentVersion = package.versions.get_value(version)
     forever do
-        let redirect = currentVersion.get("redirect")
+        let redirect = currentVersion.get_value("redirect")
         if (redirect) do
-            currentVersion = package.versions.get(redirect)
+            currentVersion = package.versions.get_value(redirect)
             continue
         break
-    let filename = currentVersion.get("filename")
+    let filename = currentVersion.get_value("filename")
     let p = path.join([program.cwd, "data","packages", name, filename])
-    package.downloads = package.get("downloads", 0) + 1
+    package.downloads = package.get_value("downloads", 0) + 1
     res.sendFile(p)
 app.get("/isotope-download", download)

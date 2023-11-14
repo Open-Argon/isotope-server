@@ -3,22 +3,22 @@ import "database" as *
 import "url.ar" as url
 
 let editPackage(req, res) = do
-    let acc = account.getByToken(req.cookies.get("token", ""))
+    let acc = account.getByToken(req.cookies.get_value("token", ""))
     if (not acc) return res.redirect("/login?"+url.queryStr({to:req.path+"?"+url.queryStr(req.formdata)}))
-    let name = req.query.get("name", "")
-    let pkg = packages.get(name)
+    let name = req.query.get_value("name", "")
+    let pkg = packages.get_value(name)
     if ((not pkg) || pkg.owner != acc.id) do
         res.code = 404
         res.renderTemplate("404.html", {})
         return
     if (req.method == "POST") do
-        let shortDescription = req.formdata.get("short-description", "")
-        let description = req.formdata.get("description", "")
-        let license = req.formdata.get("license", "")
-        let repository = req.formdata.get("repository", "")
-        let keywords = req.formdata.get("keywords", "")
+        let shortDescription = req.formdata.get_value("short-description", "")
+        let description = req.formdata.get_value("description", "")
+        let license = req.formdata.get_value("license", "")
+        let repository = req.formdata.get_value("repository", "")
+        let keywords = req.formdata.get_value("keywords", "")
         let errResp(err) = res.renderTemplate("editPackage.html", {name:name, "short-description":shortDescription, description:description, license:license, repository:repository, keywords:keywords, error:err})
-        let package = packages.get(name)
+        let package = packages.get_value(name)
         if (package == null) do
             errResp("Package does not exist")
             return

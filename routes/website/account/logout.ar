@@ -2,9 +2,9 @@ import "server" as *
 import "database" as *
 
 let logout(req, res) = do
-    let redirect = req.query.get("to", "/login")
+    let redirect = req.query.get_value("to", "/login")
     if (redirect == "/logout") redirect = "/login"
-    term.log(account.deleteToken(req.cookies.get("token", "")))
+    term.log(account.deleteToken(req.cookies.get_value("token", "")))
     res.deleteCookie("token")
     res.redirect(redirect)
 app.get("/logout", logout)

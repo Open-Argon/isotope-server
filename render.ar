@@ -13,6 +13,6 @@ let navbar(acc) = do
     return '<div class="navbar"><a href="/"><div class="logo"></div></a><div class="links">'+links.join("")+'</div></div>'
 
 let middleware(req,res) = do
-    let acc = account.getByToken(req.cookies.get("token", ""))
+    let acc = account.getByToken(req.cookies.get_value("token", ""))
     res.templateValues.navbar = navbar(acc)
     res.next()

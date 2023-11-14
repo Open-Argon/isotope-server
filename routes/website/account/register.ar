@@ -2,15 +2,15 @@ import "server" as *
 import "database" as *
 
 let register(req, res) = do
-    let redirect = req.query.get("to", "/")
+    let redirect = req.query.get_value("to", "/")
     if (redirect == "/register") redirect = "/"
-    let acc = account.getByToken(req.cookies.get("token", ""))
+    let acc = account.getByToken(req.cookies.get_value("token", ""))
     if (acc) do
         return res.redirect(redirect)
     else if (req.method == "POST") do
-        let username = req.formdata.get("username")
-        let email = req.formdata.get("email")
-        let password = req.formdata.get("password")
+        let username = req.formdata.get_value("username")
+        let email = req.formdata.get_value("email")
+        let password = req.formdata.get_value("password")
         let errResp(err) = res.renderTemplate("register.html", {errorMsg:err, username:username, email:email})
         if (not username) return errResp("Missing username")
         else if (not email) return errResp("Missing email")
