@@ -21,4 +21,4 @@ let search(req, res) = do
     let filename = currentVersion.get("filename")
     let URL = config.url+"/isotope-download?"+urllib.queryStr({name:currentVersion.name, version:currentVersion.version})
     res.json({Name: currentVersion.name, Version: currentVersion.version, URL:URL })
-app.route("/isotope-search", null, search)
+app.get("/isotope-search", search)

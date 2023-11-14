@@ -5,4 +5,6 @@ term.log("domain: "+domain)
 let port = number(env.get("PORT", 7030))
 term.log("port: "+port)
 
-term.log(env)
+let env_keys = env.keys()
+for (i from 0 to env_keys.length) do
+    term.log(env_keys[i]+": "+env[env_keys[i]])

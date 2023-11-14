@@ -3,4 +3,4 @@ import "database" as *
 
 let home(req, res) = do
     res.renderTemplate("index.html", {})
-app.route("/", null, home)
+app.get("/", home)

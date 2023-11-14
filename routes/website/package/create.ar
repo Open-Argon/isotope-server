@@ -56,4 +56,4 @@ let newPackage(req, res) = do
     values.repository = req.query.get("repository", "")
     values.keywords = req.query.get("keywords", "")
     res.renderTemplate("createPackage.html", values)
-app.route("/package/create", ["GET", "POST"], newPackage)
+app.all("/package/create", newPackage)

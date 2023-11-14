@@ -21,4 +21,4 @@ let download(req, res) = do
     let p = path.join([program.cwd, "data","packages", name, filename])
     package.downloads = package.get("downloads", 0) + 1
     res.sendFile(p)
-app.route("/isotope-download", null, download)
+app.get("/isotope-download", download)

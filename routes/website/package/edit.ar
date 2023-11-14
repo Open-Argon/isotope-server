@@ -58,4 +58,4 @@ let editPackage(req, res) = do
     values.repository = pkg["repository"]
     values.keywords = pkg["keywords"].join(", ")
     res.renderTemplate("editPackage.html", values)
-app.route("/package/edit", ["GET", "POST"], editPackage)
+app.all("/package/edit", editPackage)

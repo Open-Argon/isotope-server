@@ -3,7 +3,6 @@ import "database" as *
 
 let register(req, res) = do
     let redirect = req.query.get("to", "/")
-    term.log(redirect, req.query)
     if (redirect == "/register") redirect = "/"
     let acc = account.getByToken(req.cookies.get("token", ""))
     if (acc) do
@@ -23,4 +22,4 @@ let register(req, res) = do
         res.redirect(redirect)
         return
     res.renderTemplate("register.html", {})
-app.route("/register", ["GET", "POST"], register)
+app.all("/register", register)

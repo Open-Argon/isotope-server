@@ -44,4 +44,4 @@ let push(req, res) = do
         package.versions['latest'] = {redirect: version}
     makeChange()
     res.send("OK")
-app.route("/isotope-push", ['POST'], push)
+app.post("/isotope-push", push)

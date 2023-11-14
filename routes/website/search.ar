@@ -36,4 +36,4 @@ let search(req, res) = do
     render.extend(namedSearch)
     render.extend(descriptionSearch)
     res.renderTemplate("search.html", {query:query, numOfResults:results, results:render.join(""), navbar:renderer.navbar(acc)})
-app.route("/search", null, search)
+app.get("/search", search)

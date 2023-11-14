@@ -7,4 +7,4 @@ let logout(req, res) = do
     term.log(account.deleteToken(req.cookies.get("token", "")))
     res.deleteCookie("token")
     res.redirect(redirect)
-app.route("/logout", null, logout)
+app.get("/logout", logout)

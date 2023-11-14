@@ -15,4 +15,4 @@ let accountpage(req, res) = do
     let deleteCommand = shlex.join(["isotope", "auth", "--remove", config.domain])
     term.log(command, deleteCommand)
     res.renderTemplate("auth.html", {command:command, deleteCommand:deleteCommand})
-app.route("/account/auth", ["POST"], accountpage)
+app.post("/account/auth", accountpage)
