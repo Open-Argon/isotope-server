@@ -9,7 +9,7 @@ let accountpage(req, res) = do
     let keys = packages.keys()
     keys.sort()
     let packages = keys.filter((key) = packages[key].owner == acc.id).map((key) = packages[key])
-    packages.sort(false,(package)=package.get_value("downloads", 0))
+    packages.sort(true,(package)=package.get_value("downloads", 0))
     let rendered = packages.map((package) = "<a href='/package?"+url.queryStr({name:package.name})+"'><h1>"+bleach.clean(package.name)+"</h1><p>"+bleach.clean(package.get_value("short-description",""))+"</p></a>")
     res.renderTemplate("profile.html", {username:acc.username, packages:rendered.join("")})
 app.get("/author", accountpage)
