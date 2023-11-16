@@ -23,6 +23,7 @@ import "routes/website/package/create"
 import "routes/website/account/auth"
 import "routes/website/account/login"
 import "routes/website/account/logout"
+import "routes/website/account/profile"
 import "routes/website/account/account"
 import "routes/website/account/register"
 
