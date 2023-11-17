@@ -6,13 +6,10 @@ import "config" as config
 
 let accountpage(req, res) = do
     let acc = account.getByToken(req.cookies.get_value("token", ""))
-    term.log(acc)
     if (not acc) return res.redirect("/login?"+url.queryStr({to:"/account"}))
     let token = account.makeToken(acc)
-    term.log(token)
     if (not token) return res.redirect("/login?"+url.queryStr({to:"/account"}))
     let command = shlex.join(["isotope", "auth", "--add", config.domain, token])
     let deleteCommand = shlex.join(["isotope", "auth", "--remove", config.domain])
-    term.log(command, deleteCommand)
     res.renderTemplate("auth.html", {command:command, deleteCommand:deleteCommand})
 app.post("/account/auth", accountpage)

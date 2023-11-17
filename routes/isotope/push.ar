@@ -35,7 +35,6 @@ let push(req, res) = do
         package.versions[version] = currentVersion
     let filename = version+".tar.gz"
     let p = path.join([directory, filename])
-    term.log(directory)
     path.mkAllDir(directory)
     file.save(p)
     currentVersion.filename = filename
