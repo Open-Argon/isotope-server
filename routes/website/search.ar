@@ -10,6 +10,7 @@ let search(req, res) = do
     let lowerQuery = query.lower()
     let keys = packages.keys()
     keys.sort()
+    keys.sort(true, (key)=packages[key].get_value("downloads", 0))
     let namedSearch = []
     let descriptionSearch = []
     let results = 0
