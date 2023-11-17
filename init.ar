@@ -1,34 +1,49 @@
-term.time("load")
+term.time("all")
+
+term.time("startup")
 import "server" as *
 import "config" as *
 import "render" as render
 import "database"
+term.timeEnd("startup")
 
 # isotope
+term.time("isotope")
 import "routes/isotope/push"
 import "routes/isotope/search"
 import "routes/isotope/download"
+term.timeEnd("isotope")
 
 # middleware
+term.time("website")
+term.time("render middleware")
 app.use(render.middleware)
+term.timeEnd("render middleware")
 
 # website
+term.time("main part website")
 import "routes/website/home"
 import "routes/website/search"
 import "routes/website/package"
 import "routes/website/package/edit"
 import "routes/website/package/create"
+term.timeEnd("main part website")
 
 # account
+term.time("account page")
 import "routes/website/account/auth"
 import "routes/website/account/login"
 import "routes/website/account/logout"
 import "routes/website/account/profile"
 import "routes/website/account/account"
 import "routes/website/account/register"
+term.timeEnd("account page")
 
 # error pages
 import "routes/404"
+term.timeEnd("website")
 
+term.time("boot")
 app.run()
-term.timeEnd("load")
+term.timeEnd("boot")
+term.timeEnd("all")
