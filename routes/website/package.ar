@@ -45,5 +45,8 @@ let package(req, res) = do
         if (versioni == "latest") versions.insert(0, html)
         else versions.append(html)
     let author = account.getById(package.get_value("owner")) || {username:"Unknown", id:""}
-    res.renderTemplate("package.html", {name:name, description: package.get_value("description", ""), 'short-description': package.get_value("short-description", ""), 'downloads': commaSeperatedNumber(package.get_value("downloads", 0)), keywords:package.get_value("keywords", []).join(', '), repository:package.get_value("repository", "https://github.com/"), license: package.get_value("license", "Unspecified"), author: author.username, authorPage: '/author?'+url.queryStr({id:author.id}), version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'")})
+    let edit = ""
+    if (acc != null && acc.id == author.id) do
+        edit = "<a style=\"float: right\" href='/package/edit?"+url.queryStr({name:name})+"'><h2>Edit</h2></a>"
+    res.renderTemplate("package.html", {name:name, description: package.get_value("description", ""), 'short-description': package.get_value("short-description", ""), 'downloads': commaSeperatedNumber(package.get_value("downloads", 0)), keywords:package.get_value("keywords", []).join(', '), repository:package.get_value("repository", "https://github.com/"), license: package.get_value("license", "Unspecified"), author: author.username, authorPage: '/author?'+url.queryStr({id:author.id}), version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'"), editButton: edit})
 app.get("/package", package)
