@@ -8,14 +8,16 @@ let changes = {n: 0, last: 0}
 let validVersion(version) = do
     if (version.length < 1 || version.length > 16) return false
     for (i from 0 to version.length) do
-        if (i > 0 && i < version.length-1 && version[i] not in "abcdefghijklmnopqrstuvwxyz0123456789-.") return false
+        if (i > 0 && i < version.length-1) do
+            if (version[i] not in "abcdefghijklmnopqrstuvwxyz0123456789-.") return false
         else if (version[i] not in "abcdefghijklmnopqrstuvwxyz0123456789") return false
     return true
 
 let validName(name) = do
     if (name.length < 3 || name.length > 32) return false
     for (i from 0 to name.length) do
-        if (i > 0 && i < name.length-1 && name[i] not in "abcdefghijklmnopqrstuvwxyz0123456789-.") return false
+        if (i > 0 && i < name.length-1) do
+            if (name[i] not in "abcdefghijklmnopqrstuvwxyz0123456789-.") return false
         else if (name[i] not in "abcdefghijklmnopqrstuvwxyz0123456789") return false
     return true
 
