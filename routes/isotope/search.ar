@@ -5,6 +5,11 @@ import "url.ar" as urllib
 
 let search(req, res) = do
     let name = req.query.get_value("name", null)
+    if (name == null) do
+        res.code = 400
+        res.send("Name is required")
+        return
+    name = name.toLower()
     let version = req.query.get_value("version", "latest")
     let package = packages.get_value(name)
     if (package == null) do

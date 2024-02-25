@@ -1,6 +1,12 @@
 import "server" as *
 import "database" as *
+import "config" as config
 
 let home(req, res) = do
-    res.renderTemplate("index.html", {})
+    let push_command = "isotope package push"
+    let push_command_latest = "isotope package push --latest"
+    if (config.default_domain != config.domain) do
+        push_command += " " + config.domain
+        push_command_latest += " " + config.domain
+    res.renderTemplate("index.html", {discord_URL: config.discord_URL, source_code_URL: config.source_code_URL, push_command: push_command, push_command_quote: push_command.replace("'", "\\'"), push_command_latest: push_command_latest, push_command_latest_quote: push_command_latest.replace("'", "\\'")})
 app.get("/", home)

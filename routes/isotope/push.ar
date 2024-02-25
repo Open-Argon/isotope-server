@@ -19,6 +19,10 @@ let push(req, res) = do
     if (package == null) do
         res.code = 404
         return res.send("Package not found")
+    if (version not in package.versions.keys() && not validName(version)) do
+        res.code = 400
+        res.send("Invalid version type")
+        return
     let acc = account.getByToken(req.headers.get_value("isotope-auth", ""))
     if (acc == null) do
         res.code = 403

@@ -45,6 +45,8 @@
         <meta name="msapplication-TileColor" content="#0b1d28" />
         <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
         <meta name="theme-color" content="#0b1d28" />
+        <meta name="description" content="The official package manager for Argon" />
+        <script src="/script.js"></script>
     </head>
     <body>
         <div class="content">
@@ -131,6 +133,51 @@
                     />
                     <input type="submit" value="Search" class="button" />
                 </form>
+            </div>
+            <div>
+                <h1>What is Isotope?</h1>
+                <p>
+                    Isotope is the official package manager for
+                    <a
+                        style="color: var(--primary)"
+                        href="https://argon.wbell.dev/"
+                        >Argon</a
+                    >. It is a simple, fast, and secure package manager for
+                    Argon. It is designed to be easy to use and easy to install.
+                </p>
+                <h1>How do I install Isotope?</h1>
+                <p>
+                    Isotope comes pre-packaged with <a href="https://github.com/Open-Argon/argon-v3" 
+                    style="color: var(--primary)">Open Argon's official distribution of the Argon programming language</a>.
+                    If you would like to compile Isotope from source, you can find the source code at <a href="https://github.com/Open-Argon/Isotope" 
+                    style="color: var(--primary)">https://github.com/Open-Argon/Isotope</a> and follow the instructions in the README.
+                </p>
+                <h1>How do I use Isotope?</h1>
+                <p>to access the help menu in isotope, run the following command inside the terminal:</p>
+                <pre class="copyable-pre" onclick="copyToClipboard('isotope help')" data-command="isotope --help">isotope help<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
+                <p>If you need any further assistance, please feel free to reach out to us on our <a href="{{discord_URL}}" style="color: var(--primary)">Discord server</a>.</p>
+                <h1>How do I host my own Isotope Server?</h1>
+                <p>
+                    If you would like to host your own Isotope server, you can find the source code at <a href="{{source_code_URL}}">{{source_code_URL}}</a>.
+                    All you need to do is follow the instructions in the README. If you need any further assistance, please feel free to reach out to us on our <a href="{{discord_URL}}" style="color: var(--primary)">Discord server</a>.
+                </p>
+                <h1>How do I make and upload a package to Isotope?</h1>
+                <p>
+                    If you would like to upload a package to Isotope, <a href="/login">login</a> or <a href="/register">register</a> then create an empty folder and run the following command inside the terminal:
+                </p>
+                <pre class="copyable-pre" onclick="copyToClipboard('isotope init')" data-command="isotope create">isotope init<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
+                <p>Edit "argon-package.json" and choose a name and version of your package. Note: all names and versions sent to this server have to be lowercase alpha-numeric characters, and can also include "-" and ".". The first and last characters can only be alpha-numeric. All names have to be between 3 and 32 characters long, and all versions types cannot be greater than 16 characters long.</p>
+                <p>Then make a folder called "src" inside the folder you just created, and write all your code inside the folder. Remember, for a package, its recommended to name the main file "init.ar".</p>
+                <p>Once you have written your code, run the following command inside the terminal:</p>
+                <pre class="copyable-pre" onclick="copyToClipboard('isotope package build')" data-command="isotope create">isotope package build<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
+                <p>make sure you are in the same folder as "argon-package.json".</p>
+                <p>Then run the following command inside the terminal:</p>
+                <pre class="copyable-pre" onclick="copyToClipboard('{{push_command_quote}}')" data-command="isotope create">{{push_command}}<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
+                <p>again, make sure you are in the same folder as "argon-package.json".</p>
+                <p>If you are ready to make a full stable release, run the following command:</p>
+                <pre class="copyable-pre" onclick="copyToClipboard('{{push_command_latest_quote}}')" data-command="isotope create">{{push_command_latest}}<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
+                <p>again, make sure you are in the same folder as "argon-package.json".</p>
+                <p>If you need any further assistance, please feel free to reach out to us on our <a href="{{discord_URL}}" style="color: var(--primary)">Discord server</a>.</p>
             </div>
         </div>
     </body>

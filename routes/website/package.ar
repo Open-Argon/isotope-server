@@ -1,4 +1,5 @@
 import "server" as *
+import "config" as config
 import "database" as *
 import "url.ar" as url
 import "bleach.ar" as bleach
@@ -17,7 +18,12 @@ let package(req, res) = do
     let version = req.query.get_value("version", "latest")
     let commandName = name
     if (version != "latest") commandName += "@"+version
-    let command = shlex.join(["isotope", "install", commandName])
+    let command = ["isotope", "install"]
+    if (config.default_domain != config.domain) do
+        command.append("--remote")
+        command.append(config.domain)
+    command.append(commandName)
+    command = shlex.join(command)
     let package = packages.get_value(name)
     if (package == null && version == "latest") do
         package = {versions:{}, order:{}, name:name}

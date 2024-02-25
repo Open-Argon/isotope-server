@@ -1,6 +1,9 @@
 let url = env.get_value("URL","https://isotope.wbell.dev")
 term.log("URL: "+url)
+let default_domain = "isotope.wbell.dev"
 let domain = env.get_value("domain","isotope.wbell.dev")
+let discord_URL = env.get_value("discord_URL","https://discord.com/invite/XKN79yDa5t")
+let source_code_URL = env.get_value("source_code_URL","https://github.com/Open-Argon/isotope-server")
 term.log("domain: "+domain)
 let port = number(env.get_value("PORT", 7030))
 term.log("port: "+port)
