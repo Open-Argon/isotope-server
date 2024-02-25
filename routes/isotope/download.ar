@@ -11,6 +11,10 @@ let download(req, res) = do
         res.send("Package not found")
         return
     let currentVersion = package.versions.get_value(version)
+    if (currentVersion == null) do
+        res.code = 404
+        res.send("Version not found")
+        return
     forever do
         let redirect = currentVersion.get_value("redirect")
         if (redirect) do

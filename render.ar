@@ -9,7 +9,7 @@ let navbar(acc) = do
         links.append('<a href="/login">Login</a>')
         links.append('<a href="/register">Register</a>')
     links.append('<a href="/package/create">Create</a>')
-    links.append('<a href="https://github.com/open-argon/Isotope">Github</a>')
+    links.append('<a href="https://github.com/Open-Argon/isotope-server">Github</a>')
     return '<div class="navbar"><a href="/"><div class="logo"></div></a><div class="links">'+links.join("")+'</div></div>'
 
 let middleware(req,res) = do
