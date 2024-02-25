@@ -9,7 +9,7 @@ let search(req, res) = do
         res.code = 400
         res.send("Name is required")
         return
-    name = name.toLower()
+    name = name.lower()
     let version = req.query.get_value("version", "latest")
     let package = packages.get_value(name)
     if (package == null) do
