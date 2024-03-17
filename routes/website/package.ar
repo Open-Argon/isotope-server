@@ -6,6 +6,7 @@ import "bleach.ar" as bleach
 import "shlex.ar" as shlex
 import "render" as render
 import "commaNumbers" as *
+import "markdown.ar" as markdown
 
 let package(req, res) = do
     let acc = account.getByToken(req.cookies.get_value("token", ""))
@@ -54,5 +55,5 @@ let package(req, res) = do
     let edit = ""
     if (acc != null && acc.id == author.id) do
         edit = "<a style=\"float: right\" href='/package/edit?"+url.queryStr({name:name})+"'><h2>Edit</h2></a>"
-    res.renderTemplate("package.html", {name:name, description: package.get_value("description", ""), 'short-description': package.get_value("short-description", ""), 'downloads': commaSeperatedNumber(package.get_value("downloads", 0)), keywords:package.get_value("keywords", []).join(', '), repository:package.get_value("repository", "https://github.com/"), license: package.get_value("license", "Unspecified"), author: author.username, authorPage: '/author?'+url.queryStr({id:author.id}), version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'"), editButton: edit})
+    res.renderTemplate("package.html", {name:name, description: markdown.markdown(package.get_value("description", "")), 'short-description': package.get_value("short-description", ""), 'downloads': commaSeperatedNumber(package.get_value("downloads", 0)), keywords:package.get_value("keywords", []).join(', '), repository:package.get_value("repository", "https://github.com/"), license: package.get_value("license", "Unspecified"), author: author.username, authorPage: '/author?'+url.queryStr({id:author.id}), version:version, versions:versions.join(""), command:command, commandComma:command.replace("'", "\\'"), editButton: edit})
 app.get("/package", package)

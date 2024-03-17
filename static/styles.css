@@ -185,6 +185,15 @@ input:focus {
     color: var(--accent) !important;
 }
 
+
+.md_pre {
+    background-color: var(--secondary);
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid var(--primary);
+    overflow-x: auto;
+}
+
 .copyable-pre {
     background-color: var(--secondary);
     border-radius: 10px;
@@ -201,12 +210,6 @@ input:focus {
     user-select: none;
     white-space: -moz-pre-wrap;
     white-space: -o-pre-wrap;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-}
-
-.description {
-    font-family: 'Trebuchet MS';
     white-space: pre-wrap;
     word-wrap: break-word;
 }

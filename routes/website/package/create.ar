@@ -29,8 +29,9 @@ let newPackage(req, res) = do
         if (license == "") do
             errResp("License cannot be empty")
             return
-        if (repository == "") do
-            errResp("Repository cannot be empty")
+        let repositoryURL = url.URL(repository)
+        if (not (repositoryURL.protocol && repositoryURL.host && repositoryURL.path)) do
+            errResp("upload a valid repository URL")
             return
         if (keywords == "") do
             errResp("Keywords cannot be empty")

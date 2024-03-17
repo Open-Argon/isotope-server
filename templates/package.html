@@ -60,7 +60,6 @@
                 <div class="info">
                     {{%editButton}}
                     <h1>{{name}}@{{version}}</h1>
-                    <pre class="description">{{description}}</pre>
                     <div class="split"></div>
                     <div class="atributes">
                         <div>
@@ -83,6 +82,8 @@
                         onclick="copyToClipboard(event.target.dataset.command)"
                         data-command="{{command}}"
                     >{{command}}<div style="float: right;margin-left: 1rem;">📋 Click to Copy</div></pre>
+                    <div class="split"></div>
+                    <div>{{%description}}</div>
                 </div>
                 <div class="versions">
                     <h2>{{downloads}} download(s)</h2>
