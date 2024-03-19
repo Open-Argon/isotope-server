@@ -37,7 +37,7 @@ to keep the server running in the background, you can use the following command:
 
 That's it! Your Isotope Server will be up and running, ready to manage and distribute software packages. Please note that there is already a public server available at https://isotope.wbell.dev/, but deploying your own server allows you to have complete control and privacy for your package management needs.
 
-feel free to edit any thing within the project to fit your needs.
+feel free to edit any thing within the project to fit your needs, but remember that this project is under AGPL-3.0, so the source code behind your changes have to be freely accessable to anyone who has network comunication with the isotope server.
 
 ## Contributing
 
