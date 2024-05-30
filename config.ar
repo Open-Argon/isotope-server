@@ -7,7 +7,3 @@ let source_code_URL = env.get_value("source_code_URL","https://github.com/Open-A
 term.log("domain: "+domain)
 let port = number(env.get_value("PORT", 7030))
 term.log("port: "+port)
-
-let env_keys = env.keys()
-for (i from 0 to env_keys.length) do
-    term.log(env_keys[i]+": "+env[env_keys[i]])
