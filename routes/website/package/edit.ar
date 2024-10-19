@@ -32,7 +32,6 @@ let editPackage(req, res) = do
             errResp("License cannot be empty")
             return
         let repositoryURL = url.URL(repository)
-        term.log(repositoryURL, repository)
         if (not (repositoryURL.protocol && repositoryURL.host && repositoryURL.path)) do
             errResp("upload a valid repository URL")
             return

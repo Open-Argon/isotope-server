@@ -7,16 +7,20 @@ let login(req, res) = do
     let acc = account.getByToken(req.cookies.get_value("token", ""))
     if (acc) do
         return res.redirect(redirect)
-    else if (req.method == "POST") do
-        let user = req.formdata.get_value("user")
-        let password = req.formdata.get_value("password")
-        let errResp(err) = res.renderTemplate("login.html", {errorMsg:err, user:user})
-        if (not user) return errResp("Missing user")
-        else if (not password) return errResp("Missing password")
-        let acc = account.login(user, password)
-        if ("error" in acc) return errResp(acc.error)
-        res.setCookie("token", {value:acc.token, path:"/", expires:time.unix(time.now().unix()+3.156e+9, 0).format()})
-        res.redirect(redirect)
-        return
     res.renderTemplate("login.html", {})
-app.all("/login", login)
+
+let loginPOST(req, res) = do
+    let redirect = req.query.get_value("to", "/")
+    if (redirect == "/login") redirect = "/"
+    let acc = account.getByToken(req.cookies.get_value("token", ""))
+    let user = req.formdata.get_value("user")
+    let password = req.formdata.get_value("password")
+    let errResp(err) = res.renderTemplate("login.html", {errorMsg:err, user:user})
+    if (not user) return errResp("Missing user")
+    else if (not password) return errResp("Missing password")
+    let acc = account.login(user, password)
+    if ("error" in acc) return errResp(acc.error)
+    res.setCookie("token", {value:acc.token, path:"/", expires:time.unix(time.now().unix()+3.156e+9, 0).format()})
+    res.redirect(redirect)
+
+app.route("/login").get(login).post(loginPOST)
